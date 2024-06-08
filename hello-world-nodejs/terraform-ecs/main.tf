@@ -55,7 +55,7 @@ resource "aws_alb_target_group" "hello_world_tg" {
   name     = "hello-world-tg"
   port     = 3000
   protocol = "HTTP"
-  vpc_id   = "YOUR_VPC_ID"
+  vpc_id   = "vpc-00ee86013309f6fb4"
   target_type = "ip"
   health_check {
     path                = "/"
