@@ -6,15 +6,13 @@ resource "aws_ecs_cluster" "hello_world" {
   name = "hello-world-cluster"
 }
 
-
 variable "docker_image" {
   description = "The Docker image to deploy"
   type        = string
 }
 
-
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole-3"
+  name = "ecsTaskExecutionRoletest"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -66,8 +64,15 @@ resource "aws_ecs_service" "hello_world_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets         = ["subnet-010677c7ca50c7227"]
-    security_groups = ["sg-0b80b497c45782089"]
+    assign_public_ip = true
+    security_groups  = ["sg-0b80b497c45782089"]
+    subnets          = ["subnet-010677c7ca50c7227", "subnet-059433eb5160b72b1"]
+  }
+
+  load_balancer {
+    target_group_arn = aws_alb_target_group.hello_world_tg.arn
+    container_name   = "hello-world"
+    container_port   = 3000
   }
 }
 
@@ -86,7 +91,7 @@ resource "aws_alb_target_group" "hello_world_tg" {
   port     = 3000
   protocol = "HTTP"
   vpc_id   = "vpc-00ee86013309f6fb4"
-  target_type = "instance"
+  target_type = "ip"
   health_check {
     path                = "/"
     interval            = 30
@@ -106,10 +111,4 @@ resource "aws_alb_listener" "http" {
     type = "forward"
     target_group_arn = aws_alb_target_group.hello_world_tg.arn
   }
-}
-
-resource "aws_alb_target_group_attachment" "hello_world" {
-  target_group_arn = aws_alb_target_group.hello_world_tg.arn
-  target_id        = aws_ecs_service.hello_world_service.id
-  port             = 3000
 }
