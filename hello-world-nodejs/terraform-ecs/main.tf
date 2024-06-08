@@ -36,8 +36,8 @@ resource "aws_ecs_service" "hello_world_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets         = ["YOUR_SUBNET_ID"]
-    security_groups = ["YOUR_SECURITY_GROUP_ID"]
+    subnets         = ["subnet-010677c7ca50c7227"]
+    security_groups = ["sg-0b80b497c45782089"]
   }
 }
 
@@ -45,8 +45,8 @@ resource "aws_alb" "hello_world_alb" {
   name               = "hello-world-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = ["YOUR_SECURITY_GROUP_ID"]
-  subnets            = ["YOUR_SUBNET_ID"]
+  security_groups    = ["sg-0b80b497c45782089"]
+  subnets            = ["subnet-010677c7ca50c7227"]
 
   enable_deletion_protection = false
 }
