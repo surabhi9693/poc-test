@@ -14,7 +14,7 @@ variable "docker_image" {
 
 
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole-1"
+  name = "ecsTaskExecutionRole-2"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "hello_world_task" {
 }
 
 resource "aws_ecs_service" "hello_world_service" {
-  name            = "hello-world-service"
+  name            = "hello-world-service-1"
   cluster         = aws_ecs_cluster.hello_world.id
   task_definition = aws_ecs_task_definition.hello_world_task.arn
   desired_count   = 1
@@ -72,7 +72,7 @@ resource "aws_ecs_service" "hello_world_service" {
 }
 
 resource "aws_alb" "hello_world_alb" {
-  name               = "hello-world-alb-1"
+  name               = "hello-world-alb-2"
   internal           = false
   load_balancer_type = "application"
   security_groups    = ["sg-0b80b497c45782089"]
@@ -82,7 +82,7 @@ resource "aws_alb" "hello_world_alb" {
 }
 
 resource "aws_alb_target_group" "hello_world_tg" {
-  name     = "hello-world-tg-1-1"
+  name     = "hello-world-tg-2"
   port     = 3000
   protocol = "HTTP"
   vpc_id   = "vpc-00ee86013309f6fb4"
