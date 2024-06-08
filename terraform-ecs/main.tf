@@ -72,7 +72,7 @@ resource "aws_ecs_service" "hello_world_service" {
 }
 
 resource "aws_alb" "hello_world_alb" {
-  name               = "hello-world-alb"
+  name               = "hello-world-alb-1"
   internal           = false
   load_balancer_type = "application"
   security_groups    = ["sg-0b80b497c45782089"]
@@ -82,7 +82,7 @@ resource "aws_alb" "hello_world_alb" {
 }
 
 resource "aws_alb_target_group" "hello_world_tg" {
-  name     = "hello-world-tg"
+  name     = "hello-world-tg-1-1"
   port     = 3000
   protocol = "HTTP"
   vpc_id   = "vpc-00ee86013309f6fb4"
