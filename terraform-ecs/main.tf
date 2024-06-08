@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_ecs_cluster" "hello_world-test" {
+resource "aws_ecs_cluster" "hello_world" {
   name = "hello-world-cluster"
 }
 
