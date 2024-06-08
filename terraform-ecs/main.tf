@@ -52,7 +52,7 @@ resource "aws_alb" "hello_world_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = ["sg-0b80b497c45782089"]
-  subnets            = ["subnet-010677c7ca50c7227" "subnet-059433eb5160b72b1"]
+  subnets            = ["subnet-010677c7ca50c7227", "subnet-059433eb5160b72b1"]
 
   enable_deletion_protection = false
 }
