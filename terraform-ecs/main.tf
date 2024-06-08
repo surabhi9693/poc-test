@@ -16,7 +16,7 @@ resource "aws_ecs_task_definition" "hello_world_task" {
   container_definitions = jsonencode([
     {
       name      = "hello-world"
-      image     = "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      image     = "767398115349.dkr.ecr.us-west-2.amazonaws.com/hello-world:v1.0.0"
       essential = true
       portMappings = [
         {
