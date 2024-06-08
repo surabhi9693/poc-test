@@ -6,6 +6,12 @@ resource "aws_ecs_cluster" "hello_world" {
   name = "hello-world-cluster"
 }
 
+
+variable "docker_image" {
+  description = "The Docker image to deploy"
+  type        = string
+}
+
 resource "aws_ecs_task_definition" "hello_world_task" {
   family                   = "hello-world-task"
   network_mode             = "awsvpc"
